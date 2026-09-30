@@ -19,3 +19,4 @@ services:
       - ./syncs:/app/syncs
       - ./output:/app/output
       - .:/opt/stacks/psql_cron
+      - /mnt:/mnt

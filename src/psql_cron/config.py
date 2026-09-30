@@ -96,16 +96,16 @@ def parse_ini_file(filepath: Path) -> SyncConfig | None:
     section = parser[section_name]
 
     # Required and optional properties
-    database = section.get("database", "").strip()
-    schema = section.get("schema", "public").strip() or "public"
-    table = section.get("table", "").strip()
-    raw_output_path = section.get("output_path", "").strip()
+    database = section.get("database", "").strip().strip("'\"")
+    schema = (section.get("schema", "public").strip() or "public").strip("'\"")
+    table = section.get("table", "").strip().strip("'\"")
+    raw_output_path = section.get("output_path", "").strip().strip("'\"")
 
     # Parse cron schedules: supports cron, cron.1, cron.2, etc.
     cron_schedules: list[str] = []
     # Collect items matching cron or cron.<n>
     cron_matches = [
-        (k.strip().lower(), v.strip())
+        (k.strip().lower(), v.strip().strip("'\""))
         for k, v in section.items()
         if re.match(r"^(?:cron|schedule|cron_schedule)(?:\.[0-9a-zA-Z_-]+)?$", k.strip().lower())
     ]
