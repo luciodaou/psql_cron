@@ -1,0 +1,21 @@
+# Example synchronization configuration file
+# Place files with the pattern <syncname>.ini in this folder.
+# The output files will be saved as <output_path>/<syncname>.json or <output_path>/<syncname>.csv
+
+database = db_despesas
+schema = public
+table = v_cto_ff
+csv = false
+json = true
+output_path = ./output
+
+# You can define multiple cron schedules using cron.<n> (e.g. cron.1, cron.2, etc.)
+# The sync will run whenever ANY of the defined schedules trigger.
+cron.1 = 9,39 7-20 * * 2-6
+cron.2 = 0 8 * * 1
+
+# Optional database connection overrides (omit to use global .env settings):
+# host = 10.201.12.56
+# port = 1373
+# user = despesas_readonly
+# password = your_password

@@ -1,0 +1,21 @@
+[project]
+name = "psql-cron"
+version = "0.1.0"
+description = "Automated PostgreSQL table synchronization and export to JSON/CSV"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Lucio Daou", email = "lucio.azevedo@navbrasil.gov.br" }
+]
+dependencies = [
+    "croniter>=2.0.0",
+    "pg8000>=1.30.0",
+    "python-dateutil>=2.8.2",
+]
+
+[project.scripts]
+psql-cron = "psql_cron:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

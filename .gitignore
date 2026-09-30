@@ -1,0 +1,9 @@
+.env
+.venv/
+output/*
+!output/.gitkeep
+__pycache__/
+*.py[cod]
+*.tmp
+.pytest_cache/
+syncs/v_cto_ff.ini

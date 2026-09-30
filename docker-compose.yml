@@ -1,0 +1,21 @@
+services:
+  psql-cron:
+    build: .
+    container_name: psql-cron
+    restart: unless-stopped
+    user: "${UID:-1000}:${GID:-1000}"
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=${DB_HOST:-10.201.12.56}
+      - DB_PORT=${DB_PORT:-1373}
+      - DB_READONLY_USER=${DB_READONLY_USER:-despesas_readonly}
+      - DB_READONLY_PASSWORD=${DB_READONLY_PASSWORD}
+      - DEFAULT_CRON_SCHEDULE=${DEFAULT_CRON_SCHEDULE:-0 * * * *}
+      - RUN_ON_STARTUP=${RUN_ON_STARTUP:-true}
+      - RUN_ONCE=${RUN_ONCE:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./syncs:/app/syncs
+      - ./output:/app/output
+      - .:/opt/stacks/psql_cron
